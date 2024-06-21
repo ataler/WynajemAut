@@ -1,0 +1,320 @@
+﻿<Window x:Class="WynajemAut.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WynajemAut"
+        mc:Ignorable="d"
+        Title="LuxCaRent - Client" Width="1331" Height="712" Background="#FFEDEDED">
+    <Grid>
+        <Label x:Name="LogoName" Content="LuxCaRent" HorizontalAlignment="Center" VerticalAlignment="Top" Height="56" FontFamily="Lato" FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" Width="1920">
+            <Label.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Gray" Offset="1"/>
+                    <GradientStop Color="White" Offset="0"/>
+                </LinearGradientBrush>
+            </Label.Background>
+        </Label>
+        <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <Border BorderBrush="Black" BorderThickness="0,1,0,1" HorizontalAlignment="Center" Height="44" Margin="0,56,0,0" VerticalAlignment="Top" Width="1920" Background="#FF9FA9D0"></Border>
+        <Button x:Name="Konto" Content="Moje Konto" Margin="10,56,650,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Height="44" Width="140" FontFamily="Lato" FontWeight="Bold" FontSize="14" Cursor="Arrow" HorizontalAlignment="Center" Click="Konto_Click"/>
+        <Button x:Name="Flota2" Content="Flota" Margin="330,56,330,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Height="44" Width="140" FontFamily="Lato" FontWeight="Bold" FontSize="14" Cursor="Arrow" HorizontalAlignment="Center" Click="Flota2_Click"/>
+        <Button x:Name="Wyloguj" Content="Wyloguj" Margin="650,56,10,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Height="44" Width="140" FontFamily="Lato" FontWeight="Bold" FontSize="14" Cursor="Arrow" HorizontalAlignment="Center" Click="Wyloguj_Click"/>
+        <Label Content="Witamy w LuxCaRent!" HorizontalAlignment="Center" VerticalAlignment="Top" Height="56" FontFamily="Lato" FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" Width="1920" Margin="0,348,0,0"/>
+        <Grid x:Name="mojekontogrid" Visibility="Hidden" Margin="20,132,20,20" Background="#FFC3C3C3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label x:Name="Pan" Content="Pan:" Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+            <Label x:Name="Imie" Content="Imie" Grid.Row="0" Grid.Column="1" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+
+            <Label x:Name="Nazwisko" Content="Nazwisko" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+
+            <Label Content="Twój e-mail:" Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+            <Label x:Name="Email" Content="Email" Grid.Row="2" Grid.Column="1" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+
+            <Label Content="Twój numer telefonu:" Grid.Row="3" Grid.Column="0" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+            <Label x:Name="Telefon" Content="numer" Grid.Row="3" Grid.Column="1" Margin="20,0,0,0" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+
+
+            <Grid Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,25,0,0" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="TwojeAutaLabel" Content="Twoje auta: 0/2" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+                <ListBox x:Name="AutaListBox" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="800"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel MinWidth="350">
+                                    <TextBlock>
+                                        <Run Text="Id:"/>
+                                        <Run Text="{Binding id}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Wypożyczono: "/>
+                                        <Run Text="{Binding Data_wyp, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                        <Run Text=" | "/>
+                                        <Run Text="Zwrot: "/>
+                                        <Run Text="{Binding Data_praw, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="{Binding Marka}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding Model}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding Poj_Silnika}"/>
+                                        <Run Text="L"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Przebieg: "/>
+                                        <Run Text="{Binding Przebieg}"/>
+                                        <Run Text="km"/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Paliwo}"/>
+                                    <TextBlock>
+                                        <Run Text="Cena: "/>
+                                        <Run Text="{Binding Cena}"/>
+                                        <Run Text="ZŁ / Dzień"/>
+                                        <Run Text=" | "/>
+                                        <Run Text="{Binding Cena_za_msc}"/>
+                                        <Run Text="ZŁ / Miesiąc"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Do zwrotu zostało: "/>
+                                        <Run Text="{Binding LiczbaDni}"/>
+                                        <Run Text="Dni "/>
+                                        <Run Text=" | "/>
+                                        <Run Text=" Czy pojazd zwórcony: "/>
+                                        <Run Text="{Binding Odstawienie}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,25,0,0" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Oczekujące auta:" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+                <ListBox x:Name="OczekujaceAutaListBox" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="800"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel MinWidth="350">
+                                    <TextBlock>
+                                        <Run Text="Id:"/>
+                                        <Run Text="{Binding id}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Wypożyczono: "/>
+                                        <Run Text="{Binding Data_wyp, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                        <Run Text=" | "/>
+                                        <Run Text="Zwrot: "/>
+                                        <Run Text="{Binding Data_praw, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="{Binding Marka}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding Model}"/>
+                                        <Run Text=" "/>
+                                        <Run Text="{Binding Poj_Silnika}"/>
+                                        <Run Text="L"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Przebieg: "/>
+                                        <Run Text="{Binding Przebieg}"/>
+                                        <Run Text="km"/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Paliwo}"/>
+                                    <TextBlock>
+                                        <Run Text="Cena: "/>
+                                        <Run Text="{Binding Cena}"/>
+                                        <Run Text="ZŁ / Dzień"/>
+                                        <Run Text=" | "/>
+                                        <Run Text="{Binding Cena_za_msc}"/>
+                                        <Run Text="ZŁ / Za wynajem"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Do zwrotu zostało: "/>
+                                        <Run Text="{Binding LiczbaDni}"/>
+                                        <Run Text="Dni "/>
+                                        <Run Text=" | "/>
+                                        <Run Text=" Czy pojazd zwórcony: "/>
+                                        <Run Text="{Binding Odstawienie}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+        <Grid x:Name="flota2cardgrid" Visibility="Hidden" Margin="20,132,20,20" Background="#FFC3C3C3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Nasze auta:" Grid.Row="0" HorizontalAlignment="Center" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+                <ListBox x:Name="AutaListBox2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="800"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel MinWidth="350">
+                                    <TextBlock>
+                        <Run Text="Id:"/>
+                        <Run Text="{Binding id}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Dostępny"/>
+                                        <Run Text="{Binding zajete2}"/>
+                                         <Run Text=": "/>
+                                        <Run Text="{Binding kiedy}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                        <Run Text="{Binding Marka}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding Model}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding Poj_Silnika}"/>
+                        <Run Text="L"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                        <Run Text="Przebieg: "/>
+                        <Run Text="{Binding Przebieg}"/>
+                        <Run Text="km"/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Paliwo}"/>
+                                    <TextBlock>
+                        <Run Text="Cena: "/>
+                        <Run Text="{Binding Cena}"/>
+                        <Run Text="ZŁ / Dzień"/>
+                        <Run Text=" | "/>
+                        <Run Text="{Binding Cena_za_msc}"/>
+                        <Run Text="ZŁ / Za wynajem"/>
+                                    </TextBlock>
+                                    <Button Content="WYNAJMIJ (1msc)" Background="LightGreen" Foreground="black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Wynajmij_Click" CommandParameter="{Binding id}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+        <Grid x:Name="flota3cardgrid" Visibility="Hidden" Margin="20,132,20,20" Background="#FFC3C3C3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Akcje admina:" Grid.Row="0" HorizontalAlignment="Left" FontFamily="Lato" FontWeight="Bold" FontSize="15"/>
+                <ListBox x:Name="AutaOczekListBox" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="800"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="10">
+                                <StackPanel MinWidth="350">
+                                    <TextBlock>
+                                        <Run Text="Id wynajmu:"/>
+                                        <Run Text="{Binding id_wyn}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Id auta:"/>
+                                        <Run Text="{Binding id_auto}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Id użytkownika:"/>
+                                        <Run Text="{Binding id_user}"/>
+                                    </TextBlock>
+                                    <TextBlock>
+                                        <Run Text="Data wynajmu: "/>
+                                        <Run Text="{Binding Data_wyp, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                        <Run Text=" | "/>
+                                        <Run Text="Data zwrotu: "/>
+                                        <Run Text="{Binding Data_praw, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    </TextBlock>
+                                    <TextBlock Foreground="Red">
+                                        <Run Text="Dodatkowa opłata za opóźnienie: "/>
+                                        <Run Text="{Binding DodatkowaOplata}"/>
+                                        <Run Text=" zł"/>
+                                    </TextBlock>
+                                    <Button x:Name="AkceptujBtn" Content="AKCEPTUJ" Background="LightGreen" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Akceptuj_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding AkceptujVisibility}"/>
+                                    <Button x:Name="AnulujBtn" Content="ANULUJ" Background="LightCoral" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Anuluj_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding AnulujVisibility}"/>
+                                    <Button x:Name="OdstawioneBtn" Content="ODSTAWIONE" Background="Red" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Odstawione_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding OdstawioneVisibility}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

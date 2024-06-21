@@ -1,0 +1,12 @@
+﻿<Window x:Class="WynajemAut.PrzebiegWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Aktualizacja Przebiegu" Height="200" Width="400">
+    <Grid>
+        <Label Content="Aktualny przebieg:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="PrzebiegTextBox" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="200" TextChanged="PrzebiegTextBox_TextChanged"/>
+        <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="100" Click="Zatwierdz_Click"/>
+        <Button Content="Anuluj" HorizontalAlignment="Left" Margin="120,80,0,0" VerticalAlignment="Top" Width="100" Click="Anuluj_Click"/>
+        <Button Content="Pobierz przebieg" HorizontalAlignment="Left" Margin="215,39,0,0" VerticalAlignment="Top" Width="100" Click="Pobierz_Przebieg"/>
+    </Grid>
+</Window>

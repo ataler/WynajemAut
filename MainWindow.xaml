@@ -96,7 +96,7 @@
                                         <Run Text="ZŁ / Dzień"/>
                                         <Run Text=" | "/>
                                         <Run Text="{Binding Cena_za_msc}"/>
-                                        <Run Text="ZŁ / Miesiąc"/>
+                                        <Run Text="ZŁ / Za wynajem"/>
                                     </TextBlock>
                                     <TextBlock>
                                         <Run Text="Do zwrotu zostało: "/>
@@ -239,10 +239,10 @@
                         <Run Text="{Binding Cena}"/>
                         <Run Text="ZŁ / Dzień"/>
                         <Run Text=" | "/>
-                        <Run Text="{Binding Cena_za_msc}"/>
-                        <Run Text="ZŁ / Za wynajem"/>
+                        <Run Text="{Binding Cena_za_msc2}"/>
+                        <Run Text="ZŁ / Miesiąc"/>
                                     </TextBlock>
-                                    <Button Content="WYNAJMIJ (1msc)" Background="LightGreen" Foreground="black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Wynajmij_Click" CommandParameter="{Binding id}"/>
+                                    <Button Content=" WYNAJMIJ " Background="LightGreen" Foreground="black" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Wynajmij_Click" CommandParameter="{Binding id}"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -306,9 +306,9 @@
                                         <Run Text="{Binding DodatkowaOplata}"/>
                                         <Run Text=" zł"/>
                                     </TextBlock>
-                                    <Button x:Name="AkceptujBtn" Content="AKCEPTUJ" Background="LightGreen" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Akceptuj_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding AkceptujVisibility}"/>
-                                    <Button x:Name="AnulujBtn" Content="ANULUJ" Background="LightCoral" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Anuluj_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding AnulujVisibility}"/>
-                                    <Button x:Name="OdstawioneBtn" Content="ODSTAWIONE" Background="Red" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Odstawione_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding OdstawioneVisibility}"/>
+                                    <Button x:Name="AkceptujBtn" Content=" AKCEPTUJ " Background="LightGreen" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Akceptuj_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding AkceptujVisibility}"/>
+                                    <Button x:Name="AnulujBtn" Content=" ANULUJ " Background="LightCoral" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Click="Anuluj_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding AnulujVisibility}"/>
+                                    <Button x:Name="OdstawioneBtn" Content=" ODSTAWIONE " Background="Red" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Odstawione_Click" CommandParameter="{Binding id_wyn}" Visibility="{Binding OdstawioneVisibility}"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

@@ -128,6 +128,12 @@ namespace WynajemAut
             DateTime startDate = StartDatePicker.SelectedDate ?? DateTime.Now;
             DateTime endDate = EndDatePicker.SelectedDate ?? DateTime.Now;
 
+            if (startDate < DateTime.Now)
+            {
+                MessageBox.Show("Wybrane daty kolidują z istniejącym wynajmem lub są nieprawidłowe. Proszę wybrać inne daty.");
+                return;
+            }
+
             if (endDate <= startDate || IsDateOccupied(startDate, endDate))
             {
                 MessageBox.Show("Wybrane daty kolidują z istniejącym wynajmem lub są nieprawidłowe. Proszę wybrać inne daty.");

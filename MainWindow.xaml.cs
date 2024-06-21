@@ -142,15 +142,15 @@ namespace WynajemAut
                     }
                     if (userId == 0)
                     {
-                        query = "SELECT f.id, f.Marka, f.Model, f.Vin, f.Przebieg, f.Numer, f.Paliwo, f.Poj_Silnika, f.Cena, f.Dostepny, f.Akt_Zaj FROM Flota2 f LEFT JOIN Wynajem2 w ON f.id = w.id_auto";
+                        query = "SELECT f.id, f.Marka, f.Model, f.Vin, f.Przebieg, f.Numer, f.Paliwo, f.Poj_Silnika, f.Cena, f.Dostepny, f.Akt_Zaj FROM Flota2 f LEFT JOIN Wynajem2 w ON f.id = w.id_auto order by f.id desc";
                     }
                     else if (userId == -1)
                     {
-                        query = "SELECT f.id, f.Marka, f.Model, f.Vin, f.Przebieg, f.Numer, f.Paliwo, f.Poj_Silnika, f.Cena, f.Dostepny, f.Akt_Zaj FROM Flota2 f LEFT JOIN Wynajem2 w ON f.id = w.id_auto";
+                        query = "SELECT f.id, f.Marka, f.Model, f.Vin, f.Przebieg, f.Numer, f.Paliwo, f.Poj_Silnika, f.Cena, f.Dostepny, f.Akt_Zaj FROM Flota2 f LEFT JOIN Wynajem2 w ON f.id = w.id_auto order by f.id desc";
                     }
                     else
                     {
-                        query = "SELECT f.id, f.Marka, f.Model, f.Vin, f.Przebieg, f.Numer, f.Paliwo, f.Poj_Silnika, f.Cena, f.Dostepny, f.Akt_Zaj, w.Data_wyp, w.Data_odsta, w.Data_praw_odsta, w.potwierdzenie FROM Flota2 f JOIN Wynajem2 w ON f.id = w.id_auto WHERE w.id_user = @UserId";
+                        query = "SELECT f.id, f.Marka, f.Model, f.Vin, f.Przebieg, f.Numer, f.Paliwo, f.Poj_Silnika, f.Cena, f.Dostepny, f.Akt_Zaj, w.Data_wyp, w.Data_odsta, w.Data_praw_odsta, w.potwierdzenie FROM Flota2 f JOIN Wynajem2 w ON f.id = w.id_auto WHERE w.id_user = @UserId order by f.id desc";
                     }
 
                     SqlCommand sqlCMD = new SqlCommand(query, sqlCon);
@@ -315,7 +315,7 @@ namespace WynajemAut
                         sqlCon.Open();
                     }
 
-                    string query = "SELECT w.id_wyn, w.id_user, w.id_auto, w.Data_wyp, w.Data_odsta, w.Data_praw_odsta, w.potwierdzenie, w.Odstawione, f.Cena FROM Wynajem2 w JOIN Flota2 f ON w.id_auto = f.id";
+                    string query = "SELECT w.id_wyn, w.id_user, w.id_auto, w.Data_wyp, w.Data_odsta, w.Data_praw_odsta, w.potwierdzenie, w.Odstawione, f.Cena FROM Wynajem2 w JOIN Flota2 f ON w.id_auto = f.id order by w.id_wyn desc";
                     SqlCommand sqlCMD = new SqlCommand(query, sqlCon);
                     SqlDataReader reader = sqlCMD.ExecuteReader();
 
@@ -391,6 +391,17 @@ namespace WynajemAut
                 get
                 {
                     int daysRemaining = (Data_odsta - Data_wyp).Days;
+                    int cena = Int32.Parse(Cena) * daysRemaining;
+                    return cena;
+                }
+                set { }
+            }
+
+            public int Cena_za_msc2
+            {
+                get
+                {
+                    int daysRemaining = (DateTime.Now.Date.AddMonths(1) - DateTime.Now.Date).Days;
                     int cena = Int32.Parse(Cena) * daysRemaining;
                     return cena;
                 }
